@@ -75,7 +75,7 @@ class DataComponent extends Component{
                         </li>
                         ))}
                     </ul>
-                    <div className="list-group marginTop">
+                    <div className="list-group marginTop marginBottom">
                         <button className="btn btn-success btn-block" onClick={this.additem}>New</button>
                     </div>
                 </div>

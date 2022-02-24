@@ -41,6 +41,11 @@
   margin-top: 2px;
 }
 
+.marginBottom{
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+}
+
 .btn-action{
   margin-left: 4px;
 }
