@@ -33,8 +33,11 @@ class ItemComponent extends Component{
 
     validate(values){
         let errors = {};
+        let regexDescription = new RegExp(/^(\w| |-|_)+$/);
         if(values.description.length < 1){
             errors.description = "Description field should be at least 1 character"
+        }else if(!regexDescription.test(values.description)){
+            errors.description = "Invalid characters on description field"
         }
         return errors;
     }
