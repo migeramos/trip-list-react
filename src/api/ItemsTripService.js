@@ -4,7 +4,6 @@ class ItemsTripService {
 
     constructor(){
         console.log(process.env);
-        console.log(process.env.PRODTOKEN);
         if(process.env.PRODTOKEN != null){
             this.host = 'https://trip-list-eevee1.herokuapp.com';
         }
