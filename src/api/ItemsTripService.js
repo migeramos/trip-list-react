@@ -2,7 +2,14 @@ import axios from "axios";
 
 class ItemsTripService {
 
-    host = 'https://trip-list-eevee1.herokuapp.com';
+    constructor(){
+        if(process.env.prodToken!=null){
+            this.host = 'https://trip-list-eevee1.herokuapp.com';
+        }
+        else{
+            this.host = 'http://localhost:8080';
+        }
+    }
 
     retriveAllItems(){
         return axios.get(`${this.host}/trip-list/items`);
