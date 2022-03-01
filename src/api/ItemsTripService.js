@@ -3,7 +3,9 @@ import axios from "axios";
 class ItemsTripService {
 
     constructor(){
-        if(process.env.PRODTOKEN!=null){
+        console.log(process.env);
+        console.log(process.env.PRODTOKEN);
+        if(process.env.PRODTOKEN != null){
             this.host = 'https://trip-list-eevee1.herokuapp.com';
         }
         else{
