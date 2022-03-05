@@ -8,10 +8,10 @@ class ItemsTripService {
         console.log(process.env.REACT_APP_TRIP_TOKEN);
         if(process.env.REACT_APP_TRIP_TOKEN != null){*/
             this.host = 'https://trip-list-eevee1.herokuapp.com';
-        /*}
-        else{
-            this.host = 'http://localhost:8080';
-        }*/
+        //}
+        //else{
+          //  this.host = 'http://localhost:8080';
+        //}
     }
 
     retriveAllItems(){

@@ -8,11 +8,13 @@ class DataComponent extends Component{
         super(props);
         this.state = {
             listItems:[],
-            message: null
+            message: null,
+            filterBy: [],
         }
         this.additem = this.additem.bind(this);
         this.updateItem = this.updateItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.filterByAction = this.filterByAction.bind(this);
     }
 
     componentDidMount(){
@@ -53,14 +55,38 @@ class DataComponent extends Component{
             );
     }
 
+    filterByAction(filterBySelect){
+        let itemsFilterBy = [...this.state.filterBy];
+        if(itemsFilterBy.some(item => item === filterBySelect)){
+            itemsFilterBy = itemsFilterBy.filter( item => item !== filterBySelect);
+        }else{
+            itemsFilterBy.push(filterBySelect);
+        }
+        this.setState(
+            {filterBy: itemsFilterBy}
+        );
+        console.log(itemsFilterBy)
+    }
+
     render(){
         return(
             <div>
                 <div className="container">
                     <h2 className="h4-margin">Trip Objects</h2>
+                    <nav class="nav nav-pills nav-fill">
+                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('ELSA')}>ELSA</button>
+                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('ERICK')}>ERICK</button>
+                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('FERNANDA')}>FERNANDA</button>
+                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('MARIO')}>MARIO</button>
+                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('MIGUEL')}>MIGUEL</button>
+                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('NADIA')}>NADIA</button>
+                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('NOE')}>NOE</button>
+                    </nav>
                     {this.state.message && <div className="alert alert-warning">{this.state.message}</div>}
                     <ul className="list-group">
-                    {this.state.listItems.map(item => (
+                    {this.state.listItems
+                        .filter( item => this.state.filterBy.length === 0 ? true : this.state.filterBy.some( filterBy => filterBy === item.responsable ))
+                        .map( item => (
                         <li className="list-group-item" key={item.id}>
                             <div className="row">
                             <div className="col-xs-6 col-sm-6 col-md-6">
