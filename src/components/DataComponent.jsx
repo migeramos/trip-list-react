@@ -10,11 +10,21 @@ class DataComponent extends Component{
             listItems:[],
             message: null,
             filterBy: [],
+            filtersClassName: {
+                elsaButton: "btn-outline-secondary",
+                erickButton: "btn-outline-secondary",
+                ferButton: "btn-outline-secondary",
+                marioButton: "btn-outline-secondary",
+                miguelButton: "btn-outline-secondary",
+                nadiaButton: "btn-outline-secondary",
+                noeButton: "btn-outline-secondary"
+            }
         }
         this.additem = this.additem.bind(this);
         this.updateItem = this.updateItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
         this.filterByAction = this.filterByAction.bind(this);
+        this.isOnTheFilter = this.isOnTheFilter.bind(this);
     }
 
     componentDidMount(){
@@ -65,7 +75,52 @@ class DataComponent extends Component{
         this.setState(
             {filterBy: itemsFilterBy}
         );
-        console.log(itemsFilterBy)
+        console.log(itemsFilterBy);
+        this.isOnTheFilter(filterBySelect, itemsFilterBy);
+    }
+
+    isOnTheFilter(responsable, itemsFilterBy){
+        if(itemsFilterBy.some( filterBy => filterBy === responsable)){
+            console.log("is on the filter: "+responsable);
+            this.setClassNameToFilter(responsable, "btn-dark")
+        }
+        else{
+            console.log("is NOT on the filter: "+responsable);
+            this.setClassNameToFilter(responsable, "btn-outline-secondary")
+        }
+    }
+
+    setClassNameToFilter(responsable, className){
+        switch(responsable){
+            case 'ELSA':
+                console.log("responsable: "+responsable+" change classname to "+className);
+                this.setState({filtersClassName: {...this.state.filtersClassName, elsaButton: className}});
+                break;
+            case 'ERICK':
+                console.log("responsable: "+responsable+" change classname to "+className);
+                this.setState({filtersClassName: {...this.state.filtersClassName, erickButton: className}});
+                break
+            case 'FERNANDA':
+                console.log("responsable: "+responsable+" change classname to "+className);
+                this.setState({filtersClassName: {...this.state.filtersClassName, ferButton: className}});
+                break;
+            case 'MARIO':
+                console.log("responsable: "+responsable+" change classname to "+className);
+                this.setState({filtersClassName: {...this.state.filtersClassName, marioButton: className}});
+                break
+            case 'MIGUEL':
+                console.log("responsable: "+responsable+" change classname to "+className);
+                this.setState({filtersClassName: {...this.state.filtersClassName, miguelButton: className}});
+                break
+            case 'NADIA':
+                console.log("responsable: "+responsable+" change classname to "+className);
+                this.setState({filtersClassName: {...this.state.filtersClassName, nadiaButton: className}});
+                break;
+            case 'NOE':
+                console.log("responsable: "+responsable+" change classname to "+className);
+                this.setState({filtersClassName: {...this.state.filtersClassName, noeButton: className}});
+                break
+        }
     }
 
     render(){
@@ -74,13 +129,13 @@ class DataComponent extends Component{
                 <div className="container">
                     <h2 className="h4-margin">Trip Objects</h2>
                     <nav class="nav nav-pills nav-fill">
-                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('ELSA')}>ELSA</button>
-                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('ERICK')}>ERICK</button>
-                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('FERNANDA')}>FERNANDA</button>
-                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('MARIO')}>MARIO</button>
-                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('MIGUEL')}>MIGUEL</button>
-                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('NADIA')}>NADIA</button>
-                        <button class="nav-item nav-link btn btn-outline-secondary" onClick={() => this.filterByAction('NOE')}>NOE</button>
+                        <button className={`nav-item nav-link btn ${this.state.filtersClassName.elsaButton}`} onClick={() => this.filterByAction('ELSA')}>ELSA</button>
+                        <button className={`nav-item nav-link btn ${this.state.filtersClassName.erickButton}`} onClick={() => this.filterByAction('ERICK')}>ERICK</button>
+                        <button className={`nav-item nav-link btn ${this.state.filtersClassName.ferButton}`} onClick={() => this.filterByAction('FERNANDA')}>FERNANDA</button>
+                        <button className={`nav-item nav-link btn ${this.state.filtersClassName.marioButton}`} onClick={() => this.filterByAction('MARIO')}>MARIO</button>
+                        <button className={`nav-item nav-link btn ${this.state.filtersClassName.miguelButton}`} onClick={() => this.filterByAction('MIGUEL')}>MIGUEL</button>
+                        <button className={`nav-item nav-link btn ${this.state.filtersClassName.nadiaButton}`} onClick={() => this.filterByAction('NADIA')}>NADIA</button>
+                        <button className={`nav-item nav-link btn ${this.state.filtersClassName.noeButton}`} onClick={() => this.filterByAction('NOE')}>NOE</button>
                     </nav>
                     {this.state.message && <div className="alert alert-warning">{this.state.message}</div>}
                     <ul className="list-group">
